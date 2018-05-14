@@ -13,6 +13,13 @@ cdef int distance(
 ) except -1
 
 
+cdef int distance_small(
+    unicode source, unicode target,
+    char_func insert_cost,
+    char_func delete_cost,
+    cmp_func substitution_cost
+) except -1
+
 cdef int transpose_distance(
     unicode source, unicode target,
     char_func insert_cost,

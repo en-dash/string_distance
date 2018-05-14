@@ -2,7 +2,7 @@
 # cython: boundscheck=False
 # cython: wraparound=False
 
-from string_distance.minimum_edit_distance cimport distance, transpose_distance
+from string_distance.minimum_edit_distance cimport distance, transpose_distance, distance_small
 from string_distance.maximum_edit_distance cimport distance as dist
 from string_distance.cost cimport (
     ins_func, del_func,
@@ -79,6 +79,14 @@ cpdef list hammings(unicode source, list targets):
 
 cpdef int levenshtein(unicode source, unicode target):
     return distance(
+        source, target,
+        insert_cost=ins_func,
+        delete_cost=del_func,
+        substitution_cost=sub_func1
+    )
+
+cpdef int levenshtein_small(unicode source, unicode target):
+    return distance_small(
         source, target,
         insert_cost=ins_func,
         delete_cost=del_func,
